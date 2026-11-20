@@ -3,81 +3,190 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#101d35">
-<meta name="description" content="M-Control — واجهة عربية لربط أجهزتك بموافقة واضحة.">
-<link rel="manifest" href="manifest.webmanifest">
-<title>M-Control | التحكم الآمن</title>
+<meta name="theme-color" content="#09162c">
+<meta name="description" content="M-Control 2.0 — ربط ومشاركة مباشرة بموافقة الطرفين">
+<title>M-Control 2.0</title>
 <style>
-:root{color-scheme:dark;--bg:#0b1426;--panel:#14233d;--panel2:#1b3152;--muted:#a9bad5;--accent:#70a7ff;--line:#2b4163}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(circle at 80% 0%,#1a3155 0,transparent 36%),var(--bg);color:#f5f8ff;min-height:100vh}
-main{width:min(100% - 28px,720px);margin:0 auto;padding:24px 0 40px}
-header{display:flex;align-items:center;justify-content:space-between;margin:10px 0 26px}
-.logo{font-weight:850;font-size:24px;letter-spacing:.3px}.tag{font-size:12px;color:#a9bad5;border:1px solid var(--line);padding:7px 11px;border-radius:99px}
-.hero,.panel{background:linear-gradient(145deg,rgba(27,49,82,.96),rgba(18,34,58,.96));border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 18px 50px #0003}
-h1{font-size:clamp(26px,6vw,38px);margin:0 0 8px}p{color:var(--muted);line-height:1.8;margin:7px 0}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
-button,.filelabel{border:0;border-radius:14px;padding:14px 16px;font:inherit;font-weight:700;cursor:pointer;background:var(--accent);color:#08162c}
-button.secondary{background:#253d60;color:#f5f8ff;border:1px solid #3a5680}
-button:active{transform:scale(.99)}.panel{margin-top:16px;display:none}.panel.active{display:block}
-h2{font-size:21px;margin:0 0 10px}.code{font-size:clamp(30px,9vw,44px);font-weight:850;letter-spacing:5px;text-align:center;padding:16px;background:#0b172b;border:1px dashed #5878a7;border-radius:16px;margin:16px 0;font-variant-numeric:tabular-nums}
-.field{width:100%;padding:15px;border-radius:13px;border:1px solid #385477;background:#0b172b;color:white;font:inherit;font-size:18px;margin:10px 0}
-.note{font-size:13px;background:#0d1a2e;border-right:3px solid var(--accent);padding:12px;border-radius:10px;margin-top:16px}
-.status{display:inline-block;color:#b8e8c9;background:#153c32;padding:6px 10px;border-radius:99px;font-size:12px}
-.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}.tile{background:#0d1a2e;border:1px solid var(--line);border-radius:15px;padding:16px}.tile b{display:block;margin-bottom:5px}.tile span{font-size:13px;color:var(--muted)}
-input[type=file]{display:none}footer{text-align:center;color:#8195b4;font-size:12px;margin-top:24px}
-@media(max-width:430px){.actions{grid-template-columns:1fr}.hero,.panel{padding:18px}.tiles{grid-template-columns:1fr 1fr}}
+:root{color-scheme:dark;--bg:#071326;--panel:#122440;--panel2:#1b3458;--line:#2e4b73;--muted:#b4c5df;--blue:#69b5ff;--green:#63dda4;--red:#ff7777}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#244b7e 0,transparent 48%),var(--bg);color:#f5f8ff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+main{width:min(100% - 24px,760px);margin:auto;padding:18px 0 36px}
+header{display:flex;align-items:center;justify-content:space-between;margin:6px 2px 18px}.brand{display:flex;gap:10px;align-items:center;font-size:23px;font-weight:900}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#56c2ff,#2252bd);box-shadow:0 0 24px #308bff55;font-size:25px}.tag{font-size:11px;color:#c4d4ec;border:1px solid var(--line);border-radius:30px;padding:7px 10px}
+.hero,.panel{border:1px solid var(--line);border-radius:22px;padding:20px;background:linear-gradient(145deg,#172f50f5,#10213bf5);box-shadow:0 15px 45px #0003}
+h1{font-size:clamp(25px,6vw,36px);margin:12px 0 6px}h2{font-size:20px;margin:0 0 8px}p{color:var(--muted);line-height:1.75;margin:7px 0}
+.status{display:inline-block;border-radius:30px;padding:6px 10px;background:#123b32;color:#8af0bf;font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}.tile{border:1px solid var(--line);background:#0b1b32;border-radius:14px;padding:13px}.tile b{display:block;margin-bottom:4px}.tile span{font-size:12px;color:var(--muted)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+button,.filebtn{font:inherit;font-weight:750;border:0;border-radius:13px;padding:13px 14px;background:linear-gradient(135deg,#83ccff,#4b91ff);color:#07162c;cursor:pointer;text-align:center}
+button.secondary,.filebtn.secondary{background:#29466e;color:#fff;border:1px solid #41618e}button.danger{background:#6b303a;color:#fff}button:disabled{opacity:.45;cursor:not-allowed}
+.panel{display:none;margin-top:14px}.panel.active{display:block}.input{width:100%;padding:14px;border:1px solid #47658e;background:#08182d;color:#fff;border-radius:12px;font:inherit;font-size:18px;margin:9px 0}
+.code{font-size:clamp(28px,8vw,42px);font-weight:900;letter-spacing:4px;text-align:center;padding:16px;background:#08172b;border:1px dashed #6a91c2;border-radius:14px;margin:13px 0;font-variant-numeric:tabular-nums}
+.note{padding:12px;border-radius:10px;background:#0b1a30;border-right:3px solid var(--blue);font-size:13px;color:#cbd9ed;margin-top:12px;line-height:1.7}
+.good{color:var(--green)}.bad{color:#ff9999}.hidden{display:none!important}video{width:100%;max-height:360px;background:#030914;border-radius:13px;margin-top:12px}
+.fileitem{padding:10px;background:#0b1a30;border:1px solid var(--line);border-radius:10px;margin-top:8px;display:flex;justify-content:space-between;gap:10px;align-items:center;overflow-wrap:anywhere}.fileitem a{color:#a8d4ff}
+footer{text-align:center;color:#8ea5c6;font-size:12px;margin-top:20px}
+@media(max-width:480px){.actions{grid-template-columns:1fr}.hero,.panel{padding:16px}.grid{gap:8px}.tile{padding:11px}}
 </style>
 </head>
 <body>
 <main>
-<header><div class="logo">M-Control</div><div class="tag">إدارة أجهزتك بأمان</div></header>
+<header><div class="brand"><div class="logo">M</div>M-Control 2.0</div><div class="tag">Mohamed Emad</div></header>
 <section class="hero">
-  <div class="status">● واجهة تجريبية</div>
-  <h1>اتصال آمن بين هاتفين</h1>
-  <p>اختر دور هذا الهاتف. لا تتم مشاركة الشاشة أو الملفات أو الصوت إلا بموافقة واضحة من الجهاز الآخر.</p>
-  <div class="actions">
-    <button onclick="show('controller')">هذا الهاتف هو المتحكّم</button>
-    <button class="secondary" onclick="show('device')">هذا الهاتف هو الجهاز الآخر</button>
-  </div>
-  <div class="tiles">
-    <div class="tile"><b>🔢 رمز من 10 أرقام</b><span>رمز مؤقت للربط التجريبي</span></div>
-    <div class="tile"><b>📁 نقل الملفات</b><span>اختيار ومشاركة يدوية</span></div>
-    <div class="tile"><b>🖥️ مشاركة الشاشة</b><span>تتطلب موافقة المتصفح والنظام</span></div>
-    <div class="tile"><b>🛡️ الخصوصية أولاً</b><span>إيقاف المشاركة في أي وقت</span></div>
-  </div>
+ <span class="status" id="topStatus">● جاهز للاتصال</span>
+ <h1>اتصال مباشر بين هاتفين</h1>
+ <p>أنشئ رمزًا على الهاتف الأول، وأدخله على الهاتف الثاني. لا تبدأ مشاركة الشاشة أو الميكروفون أو الملفات إلا بعد موافقة واضحة.</p>
+ <div class="actions">
+  <button onclick="showPanel('sharePanel')">هذا الهاتف يشارك</button>
+  <button class="secondary" onclick="showPanel('connectPanel')">هذا الهاتف يتصل</button>
+ </div>
+ <div class="grid">
+  <div class="tile"><b>🔢 ربط برمز 10 أرقام</b><span>جلسة مباشرة عبر WebRTC</span></div>
+  <div class="tile"><b>📁 نقل الملفات</b><span>إرسال واستقبال بموافقة الطرفين</span></div>
+  <div class="tile"><b>🖥️ مشاركة الشاشة</b><span>تتطلب إذن النظام والمتصفح</span></div>
+  <div class="tile"><b>🎙️ مشاركة الصوت</b><span>تشغيل الميكروفون بعد الإذن</span></div>
+ </div>
+ <div class="note">هذه نسخة تجريبية فعلية للاتصال المباشر باستخدام PeerJS/WebRTC. نجاح الاتصال يعتمد على دعم المتصفح والشبكة؛ بعض شبكات الهاتف قد تحتاج خادم TURN إضافيًا.</div>
 </section>
-<section id="controller" class="panel">
-  <h2>وضع المتحكّم</h2>
-  <p>اكتب رمز الربط الذي يظهر على الجهاز الآخر.</p>
-  <input id="pairCode" class="field" inputmode="numeric" maxlength="10" placeholder="أدخل 10 أرقام" aria-label="رمز الربط">
-  <button onclick="checkCode()">التحقق من الرمز</button>
-  <p id="controllerMsg" class="note">التحقق هنا تجريبي داخل الصفحة فقط؛ لا يوجد اتصال فعلي بين جهازين بعد.</p>
-  <div class="actions"><button class="secondary" onclick="show('')">رجوع</button></div>
+
+<section id="sharePanel" class="panel">
+ <h2>الهاتف الذي يشارك</h2>
+ <p>اضغط إنشاء رمز، واترك الصفحة مفتوحة. أدخل الرمز على الهاتف الثاني. ستظهر لك مطالبة قبول الاتصال.</p>
+ <div class="code" id="myCode">غير متصل</div>
+ <div class="actions"><button onclick="createRoom()">إنشاء رمز اتصال</button><button class="secondary" onclick="copyMyCode()">نسخ الرمز</button></div>
+ <div id="hostStatus" class="note">لم يتم إنشاء جلسة بعد.</div>
+ <div id="incomingBox" class="note hidden">
+  <b>طلب اتصال وارد</b><p>هل توافق على ربط الهاتف الآخر؟</p>
+  <div class="actions"><button onclick="acceptIncoming()">موافقة</button><button class="danger" onclick="rejectIncoming()">رفض</button></div>
+ </div>
+ <div id="hostTools" class="hidden">
+  <hr style="border:0;border-top:1px solid #2e4b73;margin:18px 0">
+  <h2>مشاركة الملفات</h2>
+  <input id="hostFiles" type="file" multiple class="input">
+  <button onclick="sendFiles('hostFiles')">إرسال الملفات المحددة</button>
+  <h2 style="margin-top:18px">مشاركة الشاشة</h2>
+  <p>قد لا تدعم بعض متصفحات أندرويد مشاركة الشاشة من صفحة ويب.</p>
+  <button onclick="startMedia('screen')">مشاركة الشاشة</button>
+  <button class="secondary" onclick="startMedia('mic')">مشاركة الميكروفون</button>
+  <video id="localVideo" autoplay muted playsinline class="hidden"></video>
+  <div class="actions"><button class="danger" onclick="stopMedia()">إيقاف مشاركة الصوت/الشاشة</button><button class="secondary" onclick="disconnect()">إنهاء الاتصال</button></div>
+ </div>
+ <div class="note" id="hostFilesStatus">حالة نقل الملفات: لا يوجد نقل حالي.</div>
+ <div class="actions"><button class="secondary" onclick="showPanel('')">رجوع</button></div>
 </section>
-<section id="device" class="panel">
-  <h2>وضع الجهاز الآخر</h2>
-  <p>أنشئ رمزًا تجريبيًا وشاركه مع الهاتف الذي تريد ربطه.</p>
-  <div id="generatedCode" class="code">••••••••••</div>
-  <div class="actions">
-    <button onclick="newCode()">إنشاء رمز جديد</button>
-    <button class="secondary" onclick="copyCode()">نسخ الرمز</button>
-  </div>
-  <label class="filelabel" for="files" style="display:block;text-align:center;margin-top:12px;background:#253d60;color:white">اختيار ملفات للمشاركة</label>
-  <input id="files" type="file" multiple onchange="showFiles(this)">
-  <p id="fileInfo" class="note">اختيار الملفات لا يرسلها تلقائيًا؛ يلزم تنفيذ قناة مشاركة آمنة في إصدار لاحق.</p>
-  <div class="actions"><button class="secondary" onclick="show('')">رجوع</button></div>
+
+<section id="connectPanel" class="panel">
+ <h2>الهاتف الذي يتصل</h2>
+ <p>أدخل رمز العشرة أرقام الذي يظهر على الهاتف الآخر.</p>
+ <input id="remoteCode" class="input" inputmode="numeric" maxlength="10" placeholder="مثال: 1234567890">
+ <button onclick="connectToHost()">طلب الاتصال</button>
+ <div id="guestStatus" class="note">لم يتم الاتصال بعد.</div>
+ <div id="guestIncoming" class="note hidden">
+  <b>طلب مشاركة وارد</b><p>وافق فقط إذا كنت تعرف الطرف الآخر وتريد استقبال المشاركة.</p>
+  <div class="actions"><button onclick="answerMedia(true)">قبول المشاركة</button><button class="danger" onclick="answerMedia(false)">رفض</button></div>
+ </div>
+ <div id="guestTools" class="hidden">
+  <hr style="border:0;border-top:1px solid #2e4b73;margin:18px 0">
+  <h2>إرسال ملفات</h2>
+  <input id="guestFiles" type="file" multiple class="input">
+  <button onclick="sendFiles('guestFiles')">إرسال الملفات المحددة</button>
+  <h2 style="margin-top:18px">المشاركة الواردة</h2>
+  <video id="remoteVideo" autoplay playsinline></video>
+  <div class="actions"><button class="danger" onclick="disconnect()">إنهاء الاتصال</button><button class="secondary" onclick="showPanel('')">رجوع</button></div>
+ </div>
+ <div id="receivedFiles" class="note">الملفات المستلمة ستظهر هنا للتنزيل.</div>
 </section>
-<div class="note">مهم: هذه نسخة واجهة ويب أولية. لا تتصل الأجهزة فعليًا عبر الإنترنت، ولا تتحكم في الهاتف أو تقرأ الرسائل أو تسجل الصوت. يلزم خادم آمن وتطوير إضافي لميزة الربط بين الأجهزة.</div>
-<footer>بواسطة Mohamed Emad · M-Control</footer>
+<footer>لا يعمل في الخلفية ولا يصل سرًا إلى الرسائل أو بيانات الهاتف. يمكنك إنهاء الجلسة في أي وقت.</footer>
 </main>
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
-let currentCode="";
-function show(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));if(id)document.getElementById(id).classList.add('active');window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}
-function newCode(){currentCode=String(Math.floor(1000000000+Math.random()*9000000000));document.getElementById('generatedCode').textContent=currentCode;}
-function copyCode(){if(!currentCode)newCode();if(navigator.clipboard){navigator.clipboard.writeText(currentCode).then(()=>alert('تم نسخ الرمز'));}else{alert('رمز الربط: '+currentCode);}}
-function checkCode(){let v=document.getElementById('pairCode').value;let m=document.getElementById('controllerMsg');if(!/^\d{10}$/.test(v)){m.textContent='من فضلك أدخل 10 أرقام صحيحة.';return;}m.textContent='تم استلام الرمز شكليًا. لم يتم إنشاء اتصال حقيقي في هذه النسخة.';}
-function showFiles(el){let names=[...el.files].map(f=>f.name);document.getElementById('fileInfo').textContent=names.length?'تم اختيار: '+names.join('، ')+' — لم يتم رفعها أو إرسالها.':'لم يتم اختيار ملفات.';}
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){navigator.serviceWorker.register('./sw.js').catch(()=>{});}
+let peer=null, conn=null, pendingConn=null, currentCall=null, pendingCall=null, localStream=null;
+let pendingFiles=new Map(), incomingFile=null;
+const $=id=>document.getElementById(id);
+function showPanel(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));if(id)$(id).classList.add('active');}
+function status(id,msg,good=false){$(id).innerHTML=(good?'<span class="good">● ':'<span>● ')+msg+'</span>';}
+function randomCode(){const a=new Uint32Array(1);crypto.getRandomValues(a);return String(1000000000+(a[0]%9000000000));}
+function createRoom(){
+ if(!window.Peer){status('hostStatus','تعذر تحميل مكتبة الاتصال. تحقق من الإنترنت ثم أعد تحميل الصفحة.');return;}
+ if(peer){peer.destroy();peer=null;}
+ const code=randomCode();$('myCode').textContent=code;status('hostStatus','جارٍ إنشاء جلسة الاتصال…');
+ peer=new Peer('mcontrol-'+code,{debug:1});
+ peer.on('open',id=>{status('hostStatus','الجلسة جاهزة. شارك الرمز مع الهاتف الآخر واترك الصفحة مفتوحة.',true);$('topStatus').textContent='● الجلسة جاهزة';});
+ peer.on('connection',c=>{pendingConn=c;$('incomingBox').classList.remove('hidden');status('hostStatus','يوجد طلب اتصال ينتظر موافقتك.');});
+ peer.on('error',e=>status('hostStatus','خطأ اتصال: '+e.type+'. جرّب إنشاء رمز جديد.'));
+ peer.on('disconnected',()=>status('hostStatus','انقطع الاتصال بخادم الإشارة. أعد إنشاء الجلسة.'));
+}
+function copyMyCode(){const c=$('myCode').textContent;if(!/^\\d{10}$/.test(c)){alert('أنشئ رمزًا أولًا');return;}navigator.clipboard?.writeText(c).then(()=>alert('تم نسخ الرمز')).catch(()=>alert('الرمز: '+c));}
+function acceptIncoming(){if(!pendingConn)return;conn=pendingConn;pendingConn=null;$('incomingBox').classList.add('hidden');setupConnection(conn,'host');$('hostTools').classList.remove('hidden');status('hostStatus','تم قبول الاتصال. يمكنك الآن اختيار ما تريد مشاركته.',true);}
+function rejectIncoming(){if(pendingConn){pendingConn.close();pendingConn=null;}$('incomingBox').classList.add('hidden');status('hostStatus','تم رفض طلب الاتصال.');}
+function connectToHost(){
+ const code=$('remoteCode').value.trim();if(!/^\\d{10}$/.test(code)){status('guestStatus','أدخل رمزًا صحيحًا من 10 أرقام.');return;}
+ if(!window.Peer){status('guestStatus','تعذر تحميل مكتبة الاتصال. تحقق من الإنترنت.');return;}
+ if(peer){peer.destroy();peer=null;}
+ status('guestStatus','جارٍ طلب الاتصال…');
+ peer=new Peer(undefined,{debug:1});
+ peer.on('open',()=>{conn=peer.connect('mcontrol-'+code,{reliable:true});setupConnection(conn,'guest');});
+ peer.on('error',e=>status('guestStatus','تعذر الاتصال: '+e.type+'. تأكد من الرمز وأن الهاتف الآخر متصل بالإنترنت.'));
+}
+function setupConnection(c,role){
+ c.on('open',()=>{if(role==='guest'){status('guestStatus','اتصلت بالهاتف الآخر. انتظر موافقته على أي مشاركة.',true);$('guestTools').classList.remove('hidden');}else status('hostStatus','الهاتف الآخر متصل.',true);});
+ c.on('data',data=>handleData(data,role));
+ c.on('close',()=>{status(role==='host'?'hostStatus':'guestStatus','انتهى الاتصال.');});
+ c.on('error',()=>status(role==='host'?'hostStatus':'guestStatus','حدث خطأ في الاتصال.'));
+}
+function handleData(data,role){
+ if(data&&data.kind==='file-meta'){incomingFile={name:data.name,size:data.size,type:data.type,chunks:[],received:0};return;}
+ if(data&&data.kind==='file-end'){if(!incomingFile)return;const blob=new Blob(incomingFile.chunks,{type:incomingFile.type||'application/octet-stream'});const url=URL.createObjectURL(blob);const row=document.createElement('div');row.className='fileitem';const a=document.createElement('a');a.href=url;a.download=incomingFile.name;a.textContent='تنزيل '+incomingFile.name;row.append(a);$('receivedFiles').append(row);incomingFile=null;return;}
+ if(data&&data.kind==='file-chunk'&&incomingFile){incomingFile.chunks.push(data.chunk);incomingFile.received+=data.chunk.byteLength||data.chunk.length||0;return;}
+ if(data&&data.kind==='media-request'){pendingCall=data.callType;$('guestIncoming').classList.remove('hidden');status('guestStatus','الهاتف الآخر يطلب مشاركة '+(data.callType==='screen'?'الشاشة':'الصوت')+'.');return;}
+ if(data&&data.kind==='media-stop'){$('remoteVideo').srcObject=null;return;}
+}
+async function sendFiles(inputId){
+ if(!conn||!conn.open){alert('اتصل بالهاتف الآخر أولًا');return;}
+ const files=Array.from($(inputId).files||[]);if(!files.length){alert('اختر ملفًا أولًا');return;}
+ for(const file of files){
+  if(file.size>20*1024*1024){alert('الملف '+file.name+' أكبر من 20 ميجابايت في هذه النسخة.');continue;}
+  conn.send({kind:'file-meta',name:file.name,size:file.size,type:file.type});
+  const buf=await file.arrayBuffer();const chunkSize=48*1024;
+  for(let i=0;i<buf.byteLength;i+=chunkSize){const chunk=buf.slice(i,Math.min(i+chunkSize,buf.byteLength));conn.send({kind:'file-chunk',chunk});await new Promise(r=>setTimeout(r,12));}
+  conn.send({kind:'file-end'});
+ }
+ alert('تم إرسال الملفات. انتظر ظهور روابط التنزيل على الجهاز الآخر.');
+}
+async function startMedia(kind){
+ if(!conn||!conn.open){alert('اتصل بالهاتف الآخر أولًا');return;}
+ try{
+  if(kind==='screen'){
+   if(!navigator.mediaDevices?.getDisplayMedia){alert('هذا المتصفح لا يدعم مشاركة الشاشة. جرّب متصفحًا متوافقًا أو استخدم نسخة أندرويد مخصصة.');return;}
+   localStream=await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
+  }else{
+   if(!navigator.mediaDevices?.getUserMedia){alert('الميكروفون غير مدعوم في هذا المتصفح.');return;}
+   localStream=await navigator.mediaDevices.getUserMedia({audio:true,video:false});
+  }
+  conn.send({kind:'media-request',callType:kind});
+  const localCall=peer.call(conn.peer,localStream);
+  localCall.on('close',stopMedia);currentCall=localCall;
+  $('localVideo').srcObject=localStream;$('localVideo').classList.toggle('hidden',kind!=='screen');
+  localStream.getTracks().forEach(t=>t.addEventListener('ended',stopMedia));
+  status('hostStatus','طلبت مشاركة '+(kind==='screen'?'الشاشة':'الصوت')+'. الطرف الآخر يحتاج إلى قبولها.',true);
+ }catch(e){alert('لم تبدأ المشاركة: '+e.message);}
+}
+function answerMedia(yes){
+ $('guestIncoming').classList.add('hidden');
+ if(!yes){if(conn?.open)conn.send({kind:'media-stop'});status('guestStatus','رفضت طلب المشاركة.');return;}
+ if(!pendingCall){status('guestStatus','لم يصل مسار الوسائط بعد. أعد المحاولة من الهاتف الآخر.');return;}
+ // Accepting the incoming media call is handled by PeerJS call event below.
+ status('guestStatus','تم قبول طلب المشاركة.');pendingCall=null;
+}
+if(window.Peer){
+ // Incoming calls are only answered after the user explicitly accepts.
+ const oldCreateRoom=createRoom;
+ window.addEventListener('beforeunload',()=>{stopMedia();});
+}
+const originalCreateRoom=createRoom;
+createRoom=function(){originalCreateRoom();if(peer){peer.on('call',call=>{pendingCall=call;const box=$('guestIncoming');box.classList.remove('hidden');status('guestStatus','طلب مشاركة وسائط وارد. راجع الطلب قبل القبول.');box.querySelector('button').onclick=()=>{call.answer();call.on('stream',s=>{$('remoteVideo').srcObject=s;});box.classList.add('hidden');status('guestStatus','المشاركة الواردة نشطة.',true);};});}};
+const originalConnect=connectToHost;
+connectToHost=function(){originalConnect();setTimeout(()=>{if(peer)peer.on('call',call=>{pendingCall=call;$('guestIncoming').classList.remove('hidden');$('guestIncoming').querySelector('button').onclick=()=>{call.answer();call.on('stream',s=>{$('remoteVideo').srcObject=s;});$('guestIncoming').classList.add('hidden');};});},300);};
+function stopMedia(){if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null;}if(currentCall){currentCall.close();currentCall=null;}if(conn?.open)conn.send({kind:'media-stop'});$('localVideo').srcObject=null;$('localVideo').classList.add('hidden');}
+function disconnect(){stopMedia();if(conn){conn.close();conn=null;}if(peer){peer.destroy();peer=null;}$('hostTools').classList.add('hidden');$('guestTools').classList.add('hidden');status('hostStatus','تم إنهاء الجلسة.');status('guestStatus','تم إنهاء الجلسة.');$('topStatus').textContent='● غير متصل';}
 </script>
 </body>
 </html>
